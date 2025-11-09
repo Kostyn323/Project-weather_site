@@ -82,3 +82,6 @@
                                      │  (OpenWeatherMap)   │
                                      └─────────────────────┘
 ```
+
+
+<img width="859" height="389" alt="image" src="https://github.com/user-attachments/assets/3766b54c-2490-47c9-af44-385921c23fb3" />
