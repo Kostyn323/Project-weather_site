@@ -20,3 +20,28 @@ rad.json
 *.flf
 #Test results file
 TestResults.xml
+
+# Obsidian workspace and UI state
+.obsidian
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/icon.json
+.obsidian/appearance.json
+.obsidian/app.json
+.obsidian/graph.json
+.obsidian/trash.json
+
+# Cache and temporary files
+.obsidian/cache/
+.obsidian/sync-log-*.json
+
+# Plugin data (optional - ignore if you want to share plugin settings)
+.obsidian/plugins/
+
+# Desktop files
+.DS_Store
+Thumbs.db
+
+# OS files
+*.tmp
+*.temp
