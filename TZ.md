@@ -69,4 +69,27 @@
 - **AI**: Нейросейть, которая позволяет пользователю подобрать одежду в соответствии с прогнозом погоды 
 ## Схема архитектуры
 
-<img width="859" height="389" alt="image" src="https://github.com/user-attachments/assets/3766b54c-2490-47c9-af44-385921c23fb3" />
+<img width="860" height="400" alt="image" src="https://github.com/user-attachments/assets/3766b54c-2490-47c9-af44-385921c23fb3" />
+
+# Приложения
+## Цветовая схема
+### Светлая
+<img width="860" height="200" alt="image" src="https://github.com/user-attachments/assets/138a619a-0f28-45b8-aec6-b39e498682ab" />
+
+### Темная
+<img width="860" height="200" alt="image" src="https://github.com/user-attachments/assets/8390638a-acd5-47ab-84df-d23ba8eada43" />
+
+## Макеты интерфейса
+<img width="860" height="753" alt="image" src="https://github.com/user-attachments/assets/71d4ffa4-8dba-4da3-9a75-60b1913b358e" />
+
+<img width="860" height="696" alt="image" src="https://github.com/user-attachments/assets/7f005dbc-8ff9-4ac9-b0cb-cbb8f21916e3" />
+
+<img width="860" height="491" alt="image" src="https://github.com/user-attachments/assets/2159b501-a9bf-47d6-90c9-c840b2a6f307" />
+
+<img width="860" height="531" alt="image" src="https://github.com/user-attachments/assets/b5df99ff-6bdb-4ffe-b92e-33141b047a4e" />
+
+<img width="270" height="358" alt="image" src="https://github.com/user-attachments/assets/7b0cbc24-5bfc-4f1d-b0af-2ed4511b8e43" />
+
+
+
+
