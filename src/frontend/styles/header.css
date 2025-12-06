@@ -1,0 +1,62 @@
+/* Хедер */
+.header-island {
+    width: var(--block-width);
+    height: var(--header-island-height);
+    background-color: var(--block-color);
+    margin: var(--header-island-margin);
+    border-radius: var(--header-border-radius);
+    padding: var(--header-padding);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 4px 12px rgba(0, 80, 180, 0.15);
+    transition: all var(--transition-speed);
+}
+
+.location-section {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.city-name {
+    font-size: 1.5rem;
+    color: var(--text-color);
+    font-weight: 700;
+    cursor: pointer;
+    transition: color var(--transition-speed);
+    padding: 5px 10px;
+    border-radius: 8px;
+}
+
+.city-name:hover {
+    /* color: var(--header-hover-color); */
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.current-time {
+    font-size: 1.1rem;
+    font-weight: 500;
+    opacity: 0.9;
+    color: var(--text-color);
+}
+
+.header-island .settings-btn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--text-color);
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-speed);
+}
+
+.header-island .settings-btn:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    transform: rotate(30deg);
+}
