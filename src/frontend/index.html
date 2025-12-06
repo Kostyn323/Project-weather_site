@@ -3,6 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script>
+        // Применяем тему ДО загрузки страницы
+        (function() {
+            try {
+                // Пытаемся загрузить сохранённую тему
+                const savedTheme = localStorage.getItem('weatherSettings');
+                if (savedTheme) {
+                    const settings = JSON.parse(savedTheme);
+                    document.documentElement.className = settings.theme + '-theme';
+                } else {
+                    // По умолчанию дневная тема
+                    document.documentElement.className = 'day-theme';
+                }
+            } catch (e) {
+                document.documentElement.className = 'day-theme';
+            }
+        })();
+    </script>
+
+
     <title>Костик погода</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles/variables.css">
