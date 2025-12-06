@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Костик погода</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles/variables.css">
+    <link rel="stylesheet" href="styles/common.css">
+    <link rel="stylesheet" href="styles/header.css">
+    <link rel="stylesheet" href="styles/weather-today.css">
+    <link rel="stylesheet" href="styles/weather-weekly.css">
+    <link rel="stylesheet" href="styles/footer.css">
+    <link rel="stylesheet" href="styles/modals.css">
+</head>
+
+
+
+<body class="day-theme">
+    <header>
+        <div class="header-island">
+            <div class="location-section">
+                <div class="city-name" id="cityName">Владивосток</div>
+                <div class="current-time" id="currentTime">00:00:00</div>
+            </div>
+            <button class="settings-btn" id="settingsBtn">
+                <i class="fas fa-cog"></i>
+            </button>
+        </div>
+    </header>
+
+
+
+    
+        <!-- Основной контент -->
+    <main>
+        <!-- Блок погоды на сегодня -->
+        <section class="weather-today" id="weatherToday">
+            <!-- Верхняя часть с основной информацией -->
+            <div class="weather-main">
+                <!-- Левая часть: только иконка и описание погоды -->
+                <div class="weather-left">
+                    <div class="weather-icon-large" id="weatherIcon">
+                        ☀️
+                    </div>
+                    <div class="weather-condition" id="weatherCondition">Ясно</div>
+                </div>
+                
+                <!-- Правая часть: температура и детали погоды -->
+                <div class="weather-details">
+ 
+                    <!-- Верх: температура -->
+                    <div class="temp-section">
+                        <div class="current-temp" id="currentTemp">18°</div>
+                        <div class="temp-feels" id="feelsLike">Ощущается как 17°</div>
+                    </div>
+                    
+                    <!-- Сетка с деталями погоды -->
+                    <div class="details-column">
+                        <!-- Ветер -->
+                        <div class="detail-item">
+                            <div class="detail-label">Ветер</div>
+                            <div class="detail-value" id="windSpeed">3.5 м/с</div>
+                        </div>
+                        
+                        <!-- Давление -->
+                        <div class="detail-item">
+                            <div class="detail-label">Давление</div>
+                            <div class="detail-value" id="pressure">1013 гПа</div>
+                        </div>
+                        
+                        <!-- Влажность -->
+                        <div class="detail-item">
+                            <div class="detail-label">Влажность</div>
+                            <div class="detail-value" id="humidity">65%</div>
+                        </div>
+                        
+                        <!-- UV индекс -->
+                        <div class="detail-item">
+                            <div class="detail-label">UV индекс</div>
+                            <div class="detail-value" id="uvIndex">3</div>
+                        </div>
+                        
+                        <!-- Видимость -->
+                        <div class="detail-item">
+                            <div class="detail-label">Видимость</div>
+                            <div class="detail-value" id="visibility">10 км</div>
+                        </div>
+                        
+                        <!-- Осадки -->
+                        <div class="detail-item">
+                            <div class="detail-label">Осадки</div>
+                            <div class="detail-value" id="precipitation">10%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Кнопка ИИ рекомендации -->
+            <button class="ai-recommendation-btn" id="aiRecommendationBtn">
+                Что надеть сегодня?
+            </button>
+            
+            <!-- Нижняя часть с графиком -->
+            <div class="weather-bottom">
+                <h3 class="hourly-forecast-title">Погода по часам</h3>
+                <div class="hourly-chart-container" id="hourlyChart">
+                    <!-- График будет сгенерирован через JS -->
+                    <div class="chart-message">Загрузка графика...</div>
+                </div>
+            </div>
+            
+        </section>
+        
+        <!-- Блок погоды на неделю -->
+        <section class="weather-weekly" id="weatherWeekly">
+            <h2 class="weekly-title">Прогноз на неделю</h2>
+            
+            <div class="weekly-chart-container">
+                <!-- Дни недели -->
+                <div class="weekly-days" id="weeklyDays">
+                    <!-- Дни будут сгенерированы через JS -->
+                    <div class="loading-message">Загрузка прогноза...</div>
+                </div>
+                
+                <!-- График температуры -->
+                <div class="temperature-chart" id="temperatureChart">
+                    <!-- График будет сгенерирован через JS -->
+                </div>
+                
+                <!-- Детали для выбранного дня -->
+                <div class="selected-day-details" id="selectedDayDetails">
+                    <!-- Детали будут обновляться при выборе дня -->
+                </div>
+            </div>
+            
+            <button class="view-details-btn" id="viewDetailsBtn">
+                <i class="fas fa-chart-line"></i> Подробный прогноз
+            </button>
+        </section>
+        
+        <!-- Футер -->
+        <footer class="site-footer">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Костик Погода</h3>
+                    <p>Точный прогноз погоды для вашего города</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Контакты</h3>
+                    <p>email: kostik@weather.ru</p>
+                </div>
+                <div class="footer-section">
+                    <p>© 2025 Костик Погода. Все права защищены.</p>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <div class="modal-overlay" id="cityModal">
+        <div class="city-modal">
+            <div class="modal-header">
+                <h2 class="modal-title">Выберите город</h2>
+                <button class="modal-close" id="modalClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="search-container">
+                <input type="text" class="search-input" id="citySearch" 
+                    placeholder="Введите название города...">
+                <button class="search-button">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+            
+            <div class="quick-cities">
+                <h3 class="section-title"></h3>
+                <div class="cities-grid" id="quickCities">
+                    <!-- Быстрый выбор городов будет сгенерирован через JS -->
+                </div>
+            </div>
+            
+            <div class="search-results" id="searchResults">
+                <!-- Результаты поиска будут появляться здесь -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно настроек -->
+    <div class="modal-overlay" id="settingsModal">
+        <div class="settings-modal">
+            <div class="modal-header">
+                <h2 class="modal-title">Настройки</h2>
+                <button class="modal-close" id="settingsModalClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <!-- Настройки темы -->
+            <div class="settings-section">
+                <div class="section-header">
+                    <h3 class="section-title">Тема оформления</h3>
+                </div>
+                <div class="theme-options">
+                    <div class="theme-option">
+                        <input type="radio" id="theme-day" name="theme" class="theme-radio" value="day" checked>
+                        <label for="theme-day" class="theme-label">
+                            <div class="theme-icon">☀️</div>
+                            <div class="theme-name">Дневная</div>
+                            <div class="theme-desc">Светлая тема</div>
+                        </label>
+                    </div>
+                    <div class="theme-option">
+                        <input type="radio" id="theme-night" name="theme" class="theme-radio" value="night">
+                        <label for="theme-night" class="theme-label">
+                            <div class="theme-icon">🌙</div>
+                            <div class="theme-name">Ночная</div>
+                            <div class="theme-desc">Тёмная тема</div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Единицы измерения -->
+            <div class="settings-section">
+                <div class="section-header">
+                    <h3 class="section-title">Единицы измерения</h3>
+                </div>
+                
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <div class="setting-name">Температура</div>
+                        <div class="setting-desc">Выберите единицы измерения температуры</div>
+                    </div>
+                    <select class="unit-select" id="tempUnit">
+                        <option value="celsius">°C (Цельсий)</option>
+                        <option value="fahrenheit">°F (Фаренгейт)</option>
+                    </select>
+                </div>
+                
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <div class="setting-name">Скорость ветра</div>
+                        <div class="setting-desc">Единицы измерения скорости ветра</div>
+                    </div>
+                    <select class="unit-select" id="windUnit">
+                        <option value="mps">м/с</option>
+                        <option value="kph">км/ч</option>
+                        <option value="mph">миль/ч</option>
+                    </select>
+                </div>
+                
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <div class="setting-name">Давление</div>
+                        <div class="setting-desc">Единицы измерения атмосферного давления</div>
+                    </div>
+                    <select class="unit-select" id="pressureUnit">
+                        <option value="hpa">гПа</option>
+                        <option value="mmhg">мм рт. ст.</option>
+                        <option value="inhg">дюймы рт. ст.</option>
+                    </select>
+                </div>
+            </div>
+            
+            <!-- Дополнительные настройки -->
+            <div class="settings-section">
+                <div class="section-header">
+                    <h3 class="section-title">Дополнительно</h3>
+                </div>
+                
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <div class="setting-name">Обновлять автоматически</div>
+                        <div class="setting-desc">Автоматическое обновление погоды каждые 15 минут</div>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" class="toggle-checkbox" id="autoUpdate" checked>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+                
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <div class="setting-name">Уведомления</div>
+                        <div class="setting-desc">Показывать уведомления о изменении погоды</div>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" class="toggle-checkbox" id="notifications">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+                
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <div class="setting-name">Определять местоположение</div>
+                        <div class="setting-desc">Автоматически определять ваш город</div>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" class="toggle-checkbox" id="geolocation">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+            </div>
+            
+            <!-- Окошко подтверждения сброса -->
+            <div class="reset-confirm" id="resetConfirm">
+                <div class="reset-text">Вы уверены, что хотите сбросить все настройки?</div>
+                <div class="reset-buttons">
+                    <button class="reset-btn reset-confirm-btn" id="confirmReset">Сбросить</button>
+                    <button class="reset-btn reset-cancel-btn" id="cancelReset">Отмена</button>
+                </div>
+            </div>
+            
+            <!-- Кнопки действий -->
+            <div class="settings-buttons">
+                <button class="settings-btn btn-primary" id="saveSettings">
+                    <i class="fas fa-save"></i> Сохранить
+                </button>
+                <button class="settings-btn btn-secondary" id="resetSettings">
+                    <i class="fas fa-redo"></i> Сбросить
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно ИИ рекомендаций -->
+    <div class="modal-overlay" id="aiModal">
+        <div class="ai-modal">
+            <!-- Индикатор загрузки -->
+            <div class="ai-loading" id="aiLoading">
+                <div class="loading-spinner"></div>
+                <div class="loading-text">ИИ анализирует погоду и подбирает рекомендации...</div>
+            </div>
+            
+            <!-- Контент рекомендаций (скрыт по умолчанию) -->
+            <div id="aiContent" style="display: none;">
+                <div class="ai-header">
+                    <div class="ai-icon">🤖</div>
+                    <h2 class="ai-title">ИИ Рекомендация</h2>
+                    <div class="ai-subtitle">Персональные советы на основе текущей погоды</div>
+                </div>
+                
+                <!-- Основная рекомендация -->
+                <div class="main-recommendation">
+                    <div class="recommendation-text" id="aiMainRecommendation">
+                        Наденьте лёгкую куртку, сегодня прохладный ветер.
+                    </div>
+                    <div class="weather-context">
+                        <div class="context-item">
+                            <span class="context-icon">🌡️</span>
+                            <span id="aiContextTemp">18° (ощущается как 17°)</span>
+                        </div>
+                        <div class="context-item">
+                            <span class="context-icon">💨</span>
+                            <span id="aiContextWind">Ветер: 3.5 м/с</span>
+                        </div>
+                        <div class="context-item">
+                            <span class="context-icon">🌧️</span>
+                            <span id="aiContextPrecip">Вероятность осадков: 10%</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Погодные факторы -->
+                <div class="weather-factors">
+                    <div class="factors-title">Погодные факторы</div>
+                    <div class="factors-grid" id="aiFactors">
+                        <!-- Факторы будут сгенерированы через JS -->
+                    </div>
+                </div>
+                
+                <!-- Детальные рекомендации -->
+                <div class="detailed-recommendations">
+                    <!-- Одежда -->
+                    <div class="recommendation-category">
+                        <div class="category-header">
+                            <div class="category-icon">👕</div>
+                            <h3 class="category-title">Одежда</h3>
+                        </div>
+                        <ul class="recommendation-list" id="aiClothing">
+                            <!-- Рекомендации по одежде будут сгенерированы через JS -->
+                        </ul>
+                    </div>
+                    
+                    <!-- Аксессуары -->
+                    <div class="recommendation-category">
+                        <div class="category-header">
+                            <div class="category-icon">🕶️</div>
+                            <h3 class="category-title">Аксессуары</h3>
+                        </div>
+                        <ul class="recommendation-list" id="aiAccessories">
+                            <!-- Рекомендации по аксессуарам будут сгенерированы через JS -->
+                        </ul>
+                    </div>
+                    
+                    <!-- Дополнительные советы -->
+                    <div class="recommendation-category">
+                        <div class="category-header">
+                            <div class="category-icon">💡</div>
+                            <h3 class="category-title">Дополнительные советы</h3>
+                        </div>
+                        <ul class="recommendation-list" id="aiAdditionalTips">
+                            <!-- Дополнительные советы будут сгенерированы через JS -->
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Кнопки действий -->
+                <div class="ai-actions">
+                    <button class="ai-action-btn ai-refresh-btn" id="aiRefresh">
+                        <i class="fas fa-sync-alt"></i> Новые рекомендации
+                    </button>
+                    <button class="ai-action-btn ai-share-btn" id="aiShare">
+                        <i class="fas fa-share-alt"></i> Поделиться
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="scripts/modals.js"></script>
+    <script src="scripts/time.js"></script>
+    <script src="scripts/main.js"></script>
+</body>
+</html>
