@@ -1,0 +1,22 @@
+:root {
+    --bg-color: #3c9dd0;
+    --block-color: #006aa3;
+    --text-color: #d2e9ff;
+    --header-hover-color: #0059b3;
+    
+    --block-width: 90%;
+    --header-island-height: 100px;
+    --header-island-margin: 0 auto;
+    --header-border-radius: 0 0 30px 30px;
+    --header-padding: 0 20px;
+    
+    --transition-speed: 0.3s;
+}
+
+/* Ночная тема */
+.night-theme {
+    --bg-color: #0a1a2d;
+    --block-color: #1a3a5f;
+    --text-color: #cce0ff;
+    --header-hover-color: #66a3ff;
+}
