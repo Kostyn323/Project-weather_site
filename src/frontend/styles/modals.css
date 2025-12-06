@@ -555,7 +555,6 @@
     opacity: 1;
 }
 
-/* Заголовок ИИ */
 .ai-header {
     text-align: center;
     margin-bottom: 30px;
@@ -826,119 +825,7 @@
     animation: spin 1s linear infinite;
 }
 
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
 .loading-text {
     font-size: 1.1rem;
     opacity: 0.8;
 }
-
-/* Адаптивность ИИ модального окна */
-@media (max-width: 768px) {
-    .ai-modal {
-        padding: 20px;
-        width: 95%;
-        max-height: 90vh;
-    }
-    
-    .ai-icon {
-        font-size: 2.8rem;
-    }
-    
-    .ai-title {
-        font-size: 1.6rem;
-    }
-    
-    .recommendation-text {
-        font-size: 1.2rem;
-    }
-    
-    .weather-context {
-        flex-direction: column;
-        gap: 10px;
-        align-items: flex-start;
-    }
-    
-    .factors-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .ai-actions {
-        flex-direction: column;
-    }
-}
-
-@media (max-width: 480px) {
-    .ai-modal {
-        padding: 15px;
-        border-radius: 20px;
-    }
-    
-    .main-recommendation {
-        padding: 20px;
-    }
-    
-    .recommendation-category {
-        padding: 20px;
-    }
-    
-    .category-header {
-        flex-direction: column;
-        text-align: center;
-        gap: 10px;
-    }
-    
-    .factors-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-/* Адаптивность модального окна */
-@media (max-width: 768px) {
-    .city-modal {
-        padding: 20px;
-        width: 95%;
-        max-height: 85vh;
-    }
-    
-    .modal-title {
-        font-size: 1.6rem;
-    }
-    
-    .cities-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .search-input {
-        padding: 14px 18px;
-        padding-right: 55px;
-        font-size: 1rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .modal-overlay {
-        padding: 10px;
-    }
-    
-    .city-modal {
-        padding: 15px;
-        border-radius: 20px;
-    }
-    
-    .modal-header {
-        margin-bottom: 20px;
-    }
-    
-    .modal-title {
-        font-size: 1.4rem;
-    }
-} 

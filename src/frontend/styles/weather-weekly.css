@@ -1,4 +1,3 @@
-/* Блок погоды на неделю */
 .weather-weekly {
     width: calc(var(--block-width) - 4%);
     margin: 40px auto;
@@ -19,7 +18,6 @@
     border-bottom: 2px solid rgba(255, 255, 255, 0.3);
 }
 
-/* Контейнер для недельного графика */
 .weather-weekly .weekly-chart-container {
     background-color: rgba(255, 255, 255, 0.2);
     border-radius: 20px;
@@ -28,7 +26,6 @@
     margin-bottom: 25px;
 }
 
-/* Строка с днями недели */
 .weather-weekly .weekly-days {
     display: flex;
     justify-content: space-between;
@@ -36,7 +33,6 @@
     margin-bottom: 20px;
 }
 
-/* Карточка дня в графике */
 .weather-weekly .weekly-day {
     flex: 1;
     text-align: center;
@@ -100,7 +96,6 @@
     margin: 10px 0;
 }
 
-/* График температуры */
 .weather-weekly .temperature-chart {
     display: flex;
     align-items: flex-end;
@@ -111,7 +106,6 @@
     position: relative;
 }
 
-/* Столбец температуры для дня */
 .weather-weekly .temp-column {
     flex: 1;
     display: flex;
@@ -161,7 +155,6 @@
     opacity: 0.8;
 }
 
-/* Детали дня НА НЕДЕЛЕ (маленькие) */
 .weather-weekly .day-details {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -181,15 +174,14 @@
     opacity: 0.9;
 }
 
-/* Текст в деталях НА НЕДЕЛЕ (маленький) */
 .weather-weekly .detail-label {
-    font-size: 0.8rem !important;  /* МАЛЕНЬКИЙ для недели */
+    font-size: 0.8rem !important;
     opacity: 0.8;
     margin-bottom: 3px;
 }
 
 .weather-weekly .detail-value {
-    font-size: 1rem !important;  /* МАЛЕНЬКИЙ для недели */
+    font-size: 1rem !important; 
     font-weight: 600;
 }
 
@@ -215,88 +207,4 @@
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.4));
     transform: translateY(-3px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-}
-
-/* Адаптивность для недельного графика */
-@media (max-width: 1200px) {
-    .weather-weekly .weekly-days {
-        flex-wrap: wrap;
-    }
-    
-    .weather-weekly .weekly-day {
-        min-width: calc(25% - 10px);
-        margin-bottom: 10px;
-    }
-}
-
-@media (max-width: 992px) {
-    .weather-weekly .weekly-day {
-        min-width: calc(33.333% - 10px);
-    }
-    
-    .weather-weekly .day-icon {
-        font-size: 2rem;
-    }
-    
-    .weather-weekly .temp-max {
-        font-size: 1.2rem;
-    }
-    
-    .weather-weekly .temp-min {
-        font-size: 1rem;
-    }
-}
-
-@media (max-width: 768px) {
-    .weather-weekly {
-        padding: 20px;
-    }
-    
-    .weather-weekly .weekly-title {
-        font-size: 1.8rem;
-        margin-bottom: 25px;
-    }
-    
-    .weather-weekly .weekly-chart-container {
-        padding: 15px;
-    }
-    
-    .weather-weekly .weekly-day {
-        min-width: calc(50% - 10px);
-    }
-    
-    .weather-weekly .day-details {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-    }
-    
-    .weather-weekly .temp-bar {
-        width: 20px;
-    }
-}
-
-@media (max-width: 480px) {
-    .weather-weekly {
-        padding: 15px;
-    }
-    
-    .weather-weekly .weekly-title {
-        font-size: 1.6rem;
-    }
-    
-    .weather-weekly .weekly-day {
-        min-width: 100%;
-    }
-    
-    .weather-weekly .day-icon {
-        font-size: 1.8rem;
-    }
-    
-    .weather-weekly .temperature-chart {
-        height: 80px;
-    }
-    
-    .weather-weekly .temp-bar {
-        width: 15px;
-    }
 }

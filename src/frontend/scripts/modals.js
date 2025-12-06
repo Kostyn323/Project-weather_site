@@ -1,4 +1,3 @@
-// Модальное окно выбора города
 class CityModal {
     constructor() {
         this.modal = document.getElementById('cityModal');
@@ -186,11 +185,9 @@ class CityModal {
     }
 }
 
-// Инициализация при загрузке
 document.addEventListener('DOMContentLoaded', () => {
     window.cityModal = new CityModal();
     
-    // Обновляем обработчик клика на город в хедере
     const cityElement = document.getElementById('cityName');
     if (cityElement) {
         cityElement.addEventListener('click', () => {
@@ -198,14 +195,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
     
-    // Удаляем старый обработчик из city.js если он есть
     const oldCityScript = document.querySelector('script[src="scripts/city.js"]');
     if (oldCityScript) {
         oldCityScript.remove();
     }
 });
 
-// Модальное окно настроек
 class SettingsModal {
     constructor() {
         this.modal = document.getElementById('settingsModal');
@@ -219,7 +214,6 @@ class SettingsModal {
     
     // Загрузить сохранённые настройки
     loadSettings() {
-        // Загружаем из localStorage или используем значения по умолчанию
         const settings = JSON.parse(localStorage.getItem('weatherSettings')) || {
             theme: 'day',
             tempUnit: 'celsius',
@@ -230,7 +224,6 @@ class SettingsModal {
             geolocation: false
         };
         
-        // Устанавливаем значения в форму
         document.getElementById('theme-' + settings.theme).checked = true;
         document.getElementById('tempUnit').value = settings.tempUnit;
         document.getElementById('windUnit').value = settings.windUnit;
@@ -239,11 +232,9 @@ class SettingsModal {
         document.getElementById('notifications').checked = settings.notifications;
         document.getElementById('geolocation').checked = settings.geolocation;
         
-        // Применяем тему
         this.applyTheme(settings.theme);
     }
     
-    // Сохранить настройки
     saveSettings() {
         const settings = {
             theme: document.querySelector('input[name="theme"]:checked').value,
@@ -261,25 +252,18 @@ class SettingsModal {
         // Применяем изменения
         this.applyTheme(settings.theme);
         
-        // Показываем уведомление
         this.showNotification('Настройки сохранены!');
         
-        // Закрываем модальное окно
         this.close();
     }
     
-    // Сбросить настройки
     resetSettings() {
-        // Показываем окно подтверждения
         document.getElementById('resetConfirm').classList.add('show');
     }
     
-    // Подтвердить сброс настроек
     confirmReset() {
-        // Очищаем localStorage
         localStorage.removeItem('weatherSettings');
         
-        // Сбрасываем форму к значениям по умолчанию
         document.getElementById('theme-day').checked = true;
         document.getElementById('tempUnit').value = 'celsius';
         document.getElementById('windUnit').value = 'mps';
@@ -288,26 +272,20 @@ class SettingsModal {
         document.getElementById('notifications').checked = false;
         document.getElementById('geolocation').checked = false;
         
-        // Применяем тему по умолчанию
         this.applyTheme('day');
         
-        // Скрываем окно подтверждения
         document.getElementById('resetConfirm').classList.remove('show');
         
-        // Показываем уведомление
         this.showNotification('Настройки сброшены!');
     }
     
-    // Отменить сброс настроек
     cancelReset() {
         document.getElementById('resetConfirm').classList.remove('show');
     }
     
-    // Применить тему
     applyTheme(theme) {
         document.body.className = theme + '-theme';
         
-        // Обновляем CSS переменные для темы
         const root = document.documentElement;
         
         if (theme === 'night') {
@@ -321,9 +299,7 @@ class SettingsModal {
         }
     }
     
-    // Показать уведомление
     showNotification(message) {
-        // Создаём элемент уведомления
         const notification = document.createElement('div');
         notification.style.cssText = `
             position: fixed;
@@ -342,7 +318,6 @@ class SettingsModal {
         notification.textContent = message;
         document.body.appendChild(notification);
         
-        // Удаляем через 3 секунды
         setTimeout(() => {
             notification.style.animation = 'slideOut 0.3s';
             setTimeout(() => {
@@ -350,7 +325,6 @@ class SettingsModal {
             }, 300);
         }, 3000);
         
-        // Добавляем стили для анимации
         if (!document.getElementById('notification-styles')) {
             const style = document.createElement('style');
             style.id = 'notification-styles';
@@ -368,63 +342,53 @@ class SettingsModal {
         }
     }
     
-    // Открыть модальное окно
     open() {
         document.body.style.overflow = 'hidden';
         this.modal.classList.add('active');
-        this.loadSettings(); // Загружаем актуальные настройки
+        this.loadSettings(); 
     }
     
-    // Закрыть модальное окно
     close() {
         document.body.style.overflow = '';
         this.modal.classList.remove('active');
-        // Скрываем окно подтверждения сброса, если оно открыто
+        
         document.getElementById('resetConfirm').classList.remove('show');
     }
     
-    // Настройка обработчиков событий
+
     setupEventListeners() {
-        // Закрытие по кнопке
         document.getElementById('settingsModalClose').addEventListener('click', () => {
             this.close();
         });
         
-        // Закрытие по клику на overlay
         this.modal.addEventListener('click', (e) => {
             if (e.target === this.modal) {
                 this.close();
             }
         });
         
-        // Закрытие по Escape
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && this.modal.classList.contains('active')) {
                 this.close();
             }
         });
         
-        // Сохранение настроек
         document.getElementById('saveSettings').addEventListener('click', () => {
             this.saveSettings();
         });
         
-        // Сброс настроек
         document.getElementById('resetSettings').addEventListener('click', () => {
             this.resetSettings();
         });
         
-        // Подтверждение сброса
         document.getElementById('confirmReset').addEventListener('click', () => {
             this.confirmReset();
         });
         
-        // Отмена сброса
         document.getElementById('cancelReset').addEventListener('click', () => {
             this.cancelReset();
         });
         
-        // Сохранение по Ctrl+S
         document.addEventListener('keydown', (e) => {
             if ((e.ctrlKey || e.metaKey) && e.key === 's' && this.modal.classList.contains('active')) {
                 e.preventDefault();
@@ -432,25 +396,19 @@ class SettingsModal {
             }
         });
         
-        // Предпросмотр темы при выборе
         document.querySelectorAll('input[name="theme"]').forEach(radio => {
             radio.addEventListener('change', (e) => {
-                // Только предпросмотр, не сохраняем
                 this.applyTheme(e.target.value);
             });
         });
     }
 }
 
-// Обновим инициализацию в modals.js
 document.addEventListener('DOMContentLoaded', () => {
-    // Инициализируем модальное окно города
     window.cityModal = new CityModal();
-    
-    // Инициализируем модальное окно настроек
+
     window.settingsModal = new SettingsModal();
     
-    // Обновляем обработчик клика на город в хедере
     const cityElement = document.getElementById('cityName');
     if (cityElement) {
         cityElement.addEventListener('click', () => {
@@ -458,7 +416,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
     
-    // Обновляем обработчик кнопки настроек
     const settingsBtn = document.getElementById('settingsBtn');
     if (settingsBtn) {
         settingsBtn.addEventListener('click', () => {
@@ -466,7 +423,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
     
-    // Удаляем старый обработчик из main.js если он есть
     const oldSettingsHandler = document.querySelector('#settingsBtn[onclick]');
     if (oldSettingsHandler) {
         oldSettingsHandler.removeAttribute('onclick');
@@ -474,7 +430,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-// Модальное окно ИИ рекомендаций
 class AIModal {
     constructor() {
         this.modal = document.getElementById('aiModal');
@@ -487,16 +442,13 @@ class AIModal {
         this.setupEventListeners();
     }
     
-    // Открыть модальное окно с загрузкой
     open() {
         document.body.style.overflow = 'hidden';
         this.modal.classList.add('active');
         
-        // Показываем загрузку, скрываем контент
         this.aiLoading.style.display = 'block';
         this.aiContent.style.display = 'none';
         
-        // Симулируем загрузку данных (2 секунды)
         setTimeout(() => {
             this.generateRecommendations();
             this.aiLoading.style.display = 'none';
@@ -504,21 +456,17 @@ class AIModal {
         }, 2000);
     }
     
-    // Закрыть модальное окно
     close() {
         document.body.style.overflow = '';
         this.modal.classList.remove('active');
     }
     
-    // Сгенерировать рекомендации (заглушка с разными вариантами)
     generateRecommendations() {
         const weatherData = this.getCurrentWeatherData();
         const recommendation = this.generateAIRecommendation(weatherData);
         
-        // Обновляем основной текст рекомендации
         document.getElementById('aiMainRecommendation').textContent = recommendation.main;
         
-        // Обновляем контекст погоды
         document.getElementById('aiContextTemp').textContent = 
             `${weatherData.temp}° (ощущается как ${weatherData.feelsLike}°)`;
         document.getElementById('aiContextWind').textContent = 
@@ -526,18 +474,14 @@ class AIModal {
         document.getElementById('aiContextPrecip').textContent = 
             `Вероятность осадков: ${weatherData.precipitation}%`;
         
-        // Обновляем погодные факторы
         this.updateWeatherFactors(weatherData);
         
-        // Обновляем рекомендации по категориям
         this.updateClothingRecommendations(recommendation.clothing);
         this.updateAccessoriesRecommendations(recommendation.accessories);
         this.updateAdditionalTips(recommendation.additionalTips);
     }
     
-    // Получить текущие погодные данные (заглушка)
     getCurrentWeatherData() {
-        // В реальном приложении здесь будет запрос к API
         return {
             temp: 18,
             feelsLike: 17,
@@ -550,7 +494,6 @@ class AIModal {
         };
     }
     
-    // Сгенерировать ИИ рекомендацию
     generateAIRecommendation(weatherData) {
         const recommendations = [
             {
@@ -585,12 +528,10 @@ class AIModal {
             }
         ];
         
-        // Выбираем случайную рекомендацию
         const randomIndex = Math.floor(Math.random() * recommendations.length);
         return recommendations[randomIndex];
     }
     
-    // Обновить погодные факторы
     updateWeatherFactors(weatherData) {
         const factorsGrid = document.getElementById('aiFactors');
         factorsGrid.innerHTML = '';
@@ -616,7 +557,6 @@ class AIModal {
         });
     }
     
-    // Обновить рекомендации по одежде
     updateClothingRecommendations(clothingItems) {
         const clothingList = document.getElementById('aiClothing');
         clothingList.innerHTML = '';
@@ -629,7 +569,6 @@ class AIModal {
         });
     }
     
-    // Обновить рекомендации по аксессуарам
     updateAccessoriesRecommendations(accessories) {
         const accessoriesList = document.getElementById('aiAccessories');
         accessoriesList.innerHTML = '';
@@ -642,7 +581,6 @@ class AIModal {
         });
     }
     
-    // Обновить дополнительные советы
     updateAdditionalTips(tips) {
         const tipsList = document.getElementById('aiAdditionalTips');
         tipsList.innerHTML = '';
@@ -655,7 +593,6 @@ class AIModal {
         });
     }
     
-    // Поделиться рекомендацией
     shareRecommendation() {
         const mainText = document.getElementById('aiMainRecommendation').textContent;
         const shareText = `🤖 ИИ рекомендует: ${mainText} #КостикПогода #ИИРекомендации`;
@@ -667,14 +604,12 @@ class AIModal {
                 url: window.location.href
             });
         } else {
-            // Копируем в буфер обмена
             navigator.clipboard.writeText(shareText).then(() => {
                 this.showNotification('Рекомендация скопирована в буфер обмена!');
             });
         }
     }
     
-    // Показать уведомление
     showNotification(message) {
         const notification = document.createElement('div');
         notification.style.cssText = `
@@ -702,42 +637,34 @@ class AIModal {
         }, 3000);
     }
     
-    // Настройка обработчиков событий
     setupEventListeners() {
-        // Закрытие по клику на overlay
         this.modal.addEventListener('click', (e) => {
             if (e.target === this.modal) {
                 this.close();
             }
         });
         
-        // Закрытие по Escape
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && this.modal.classList.contains('active')) {
                 this.close();
             }
         });
         
-        // Кнопка новых рекомендаций
         document.getElementById('aiRefresh').addEventListener('click', () => {
-            this.open(); // Переоткрываем с новой загрузкой
+            this.open(); 
         });
         
-        // Кнопка поделиться
         document.getElementById('aiShare').addEventListener('click', () => {
             this.shareRecommendation();
         });
     }
 }
 
-// Обновим инициализацию в modals.js
 document.addEventListener('DOMContentLoaded', () => {
-    // Инициализируем все модальные окна
     window.cityModal = new CityModal();
     window.settingsModal = new SettingsModal();
     window.aiModal = new AIModal();
     
-    // Обновляем обработчик клика на город
     const cityElement = document.getElementById('cityName');
     if (cityElement) {
         cityElement.addEventListener('click', () => {
@@ -745,7 +672,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
     
-    // Обновляем обработчик кнопки настроек
     const settingsBtn = document.getElementById('settingsBtn');
     if (settingsBtn) {
         settingsBtn.addEventListener('click', () => {
@@ -753,7 +679,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
     
-    // Обновляем обработчик кнопки ИИ рекомендаций
     const aiBtn = document.getElementById('aiRecommendationBtn');
     if (aiBtn) {
         aiBtn.addEventListener('click', () => {
@@ -761,10 +686,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
     
-    // Удаляем старые обработчики
     const oldMainScript = document.querySelector('script[src="scripts/main.js"]');
     if (oldMainScript) {
-        // Заменяем старый main.js
         const aiBtnOld = document.getElementById('aiRecommendationBtn');
         if (aiBtnOld) {
             aiBtnOld.replaceWith(aiBtnOld.cloneNode(true));

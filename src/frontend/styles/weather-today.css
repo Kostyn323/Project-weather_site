@@ -83,7 +83,7 @@
     background-color: rgba(255, 255, 255, 0.3);
     border-radius: 20px;
     padding: 30px;
-    flex: 4; /* Занимает больше места */
+    flex: 4; 
     border: 1px solid rgba(255, 255, 255, 0.2);
     min-width: 500px;
     display: flex;
@@ -203,57 +203,4 @@
 
 .weather-today .chart-icon {
     font-size: 1.5rem;
-}
-
-@keyframes bounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-5px); }
-}
-
-/* Адаптивность для мобильных (пока базовая) */
-@media (max-width: 768px) {
-    .weather-today .weather-main {
-        flex-direction: column;
-    }
-    
-    .weather-today .weather-left {
-        justify-content: center;
-        width: 100%;
-    }
-    
-    .weather-today .weather-details {
-        width: 100%;
-        min-width: auto; /* Убираем фиксированную минимальную ширину */
-    }
-    
-    .weather-today .current-temp {
-        font-size: 3.5rem;
-    }
-    
-    .weather-today .temp-feels {
-        font-size: 1.2rem;
-    }
-    
-    .weather-today .detail-label {
-        font-size: 1.1rem; /* Уменьшаем для мобильных */
-    }
-    
-    .weather-today .detail-value {
-        font-size: 1.4rem; /* Уменьшаем для мобильных */
-    }
-    
-    .weather-today .weather-icon-large {
-        font-size: 4rem;
-        width: 80px;
-        height: 80px;
-    }
-    
-    .weather-today .hourly-chart-container {
-        padding: 15px;
-        height: 180px;
-    }
-    
-    .weather-today .chart-bar {
-        width: 20px;
-    }
 }

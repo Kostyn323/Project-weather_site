@@ -13,10 +13,9 @@
     --transition-speed: 0.3s;
 }
 
-/* Ночная тема */
 .night-theme {
-    --bg-color: #0a1a2d;
-    --block-color: #1a3a5f;
+    --bg-color: #071871;
+    --block-color: #034569;
     --text-color: #cce0ff;
     --header-hover-color: #66a3ff;
 }
